@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CookieYes & GA テストページ</title>
+
+    <!-- 1. CookieYesインストールコードをここに貼り付け -->
+    <!-- あなたのCookieYesダッシュボードから取得したスクリプトタグを以下に挿入してください -->
+    <!-- 例: <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/YOUR_WEBSITE_KEY/script.js"></script> -->
+    <!-- 必ず実際のコードに置き換えてください -->
+    <!-- Start cookieyes banner -->
+    <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/4a746d4b034eb43351e6d96f/script.js"></script>
+    <!-- End cookieyes banner -->
+
+    <!-- 2. Google Analytics (GA4) のトラッキングコード -->
+    <!-- このスクリプトはCookieYesの同意管理下で実行されるべきです -->
+    <!-- 'GA_MEASUREMENT_ID' をあなたの実際の測定IDに置き換えてください -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-20F4X83V0J"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      // デフォルトの同意状態 (CookieYesがこれを管理・上書きすることを期待)
+      // 必要に応じて、CookieYesのドキュメントに従い、より詳細なデフォルト同意コマンドを設定することもできます。
+      gtag('consent', 'default', {
+        'analytics_storage': 'denied',
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'wait_for_update': 500 // CookieYesが同意状態を更新するのを待つ時間(ms)
+      });
+
+      gtag('config', 'G-20F4X83V0J');
+    </script>
+
+    <style>
+        body { font-family: sans-serif; margin: 20px; background-color: #f4f4f4; color: #333; }
+        .container { background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1 { color: #0056b3; }
+        p { line-height: 1.6; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CookieYes & Google Analytics テストページ</h1>
+        <p>このページは、CookieYesのクッキー同意バナーが正しく表示され、ユーザーの同意に基づいてGoogle AnalyticsのCookieが管理されることをテストするためのものです。</p>
+        
+        <h2>テスト手順:</h2>
+        <ol>
+            <li><strong>CookieYesスクリプトの挿入:</strong> 上記HTMLソースコード内のコメント指示に従い、あなたのCookieYesインストールコードを正しい場所に貼り付けてください。</li>
+            <li><strong>GA測定IDの置換:</strong> Google Analyticsのトラッキングコード内の `GA_MEASUREMENT_ID` を、あなたの実際のGA4測定IDに置き換えてください。</li>
+            <li><strong>CookieYesダッシュボード設定:</strong>
+                <ul>
+                    <li>Google Analyticsが「分析 (Analytics)」カテゴリのクッキーとしてCookieYesに認識されていることを確認してください。</li>
+                    <li>必要に応じて、分析クッキーの自動ブロックが有効になっていることを確認してください。</li>
+                </ul>
+            </li>
+            <li><strong>ページの表示と操作:</strong>
+                <ul>
+                    <li>このHTMLファイルをブラウザで開きます。</li>
+                    <li>CookieYesのバナーが表示されるはずです。</li>
+                    <li>「すべて同意する」「すべて拒否する」「設定を変更する」などのオプションを試してください。</li>
+                </ul>
+            </li>
+            <li><strong>CookieとGAの確認:</strong>
+                <ul>
+                    <li>ブラウザの開発者ツール（通常F12キー）を開き、「Application」タブ（Chromeの場合）や「ストレージ」タブ（Firefoxの場合）でCookieを確認します。
+                        <ul>
+                            <li>同意した場合: Google Analytics関連のCookie（例: `_ga`, `_ga_YOUR_MEASUREMENT_ID`）が保存されるはずです。</li>
+                            <li>拒否した場合: これらのCookieは保存されないはずです。</li>
+                        </ul>
+                    </li>
+                    <li>Google Analyticsのリアルタイムレポートで、自分のアクセスが計測されるか確認します（同意した場合のみ）。</li>
+                </ul>
+            </li>
+        </ol>
+        <p>このページの内容はテスト用です。実際のコンテンツに合わせて変更してください。</p>
+    </div>
+</body>
+</html>
