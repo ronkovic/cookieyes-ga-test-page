@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GA iframeコンテンツ</title>
+
+    <!-- このページのCookieYesインストールコードをここに貼り付け (通常は親ページのみで良いが、検証のため個別に設定するケースも考慮) -->
+    <!-- 必要に応じて、親とは別のCookieYesスクリプトまたは親の同意を継承する設定を検討 -->
+
+    <!-- Google Analytics (GA4) のトラッキングコード -->
+    <!-- 'GA_MEASUREMENT_ID' をあなたの実際の測定IDに置き換えてください -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID_IFRAME"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      // デフォルトの同意状態 (CookieYesがこれを管理・上書きすることを期待)
+      gtag('consent', 'default', {
+        'analytics_storage': 'denied',
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'wait_for_update': 500 // CookieYesが同意状態を更新するのを待つ時間(ms)
+      });
+
+      // 親ページとは別のGAプロパティIDを使用するか、同じIDを使用するかは検証目的によります。
+      // ここでは異なるID (`GA_MEASUREMENT_ID_IFRAME`) として区別していますが、適宜変更してください。
+      gtag('config', 'GA_MEASUREMENT_ID_IFRAME');
+    </script>
+
+    <style>
+        body { font-family: sans-serif; margin: 10px; background-color: #e0e0e0; color: #333; }
+        .content { background-color: #fff; padding: 15px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h2>iframe内コンテンツ</h2>
+        <p>このコンテンツはiframe内に表示されています。CookieとGAの動作確認用です。</p>
+        <p>親ページのCookieYes同意設定が、このiframe内のGA計測にどのように影響するかを確認します。</p>
+    </div>
+</body>
+</html>
