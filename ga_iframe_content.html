@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GA iframeコンテンツ</title>
 
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-YYYYYYY');</script> <!-- 親とは別のGTMコンテナIDを使用する場合の例 (GTM-YYYYYYY) -->
+    <!-- End Google Tag Manager -->
+
     <!-- このページのCookieYesインストールコードをここに貼り付け (通常は親ページのみで良いが、検証のため個別に設定するケースも考慮) -->
     <!-- 必要に応じて、親とは別のCookieYesスクリプトまたは親の同意を継承する設定を検討 -->
 
@@ -30,12 +38,26 @@
       gtag('config', 'G-JD6PMBFG6J');
     </script>
 
+    <script>
+      // DataLayer PUSH Example for GTM
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        'page_location': 'iframe_content',
+        'event': 'iframe_data_ready' // Optional: custom event to signal data is ready
+      });
+    </script>
+
     <style>
         body { font-family: sans-serif; margin: 10px; background-color: #e0e0e0; color: #333; }
         .content { background-color: #fff; padding: 15px; border-radius: 5px; }
     </style>
 </head>
 <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-YYYYYYY"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
     <div class="content">
         <h2>iframe内コンテンツ</h2>
         <p>このコンテンツはiframe内に表示されています。CookieとGAの動作確認用です。</p>
