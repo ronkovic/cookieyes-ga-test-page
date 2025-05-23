@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GA iframeコンテンツ</title>
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-YYYYYYY');</script> <!-- 親とは別のGTMコンテナIDを使用する場合の例 (GTM-YYYYYYY) -->
+    <!-- End Google Tag Manager -->
+
+    <!-- このページのCookieYesインストールコードをここに貼り付け (通常は親ページのみで良いが、検証のため個別に設定するケースも考慮) -->
+    <!-- 必要に応じて、親とは別のCookieYesスクリプトまたは親の同意を継承する設定を検討 -->
+
+    <!-- Google Analytics (GA4) のトラッキングコード -->
+    <!-- 'GA_MEASUREMENT_ID' をあなたの実際の測定IDに置き換えてください -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JD6PMBFG6J"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      // デフォルトの同意状態 (CookieYesがこれを管理・上書きすることを期待)
+      gtag('consent', 'default', {
+        'analytics_storage': 'denied',
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'wait_for_update': 500 // CookieYesが同意状態を更新するのを待つ時間(ms)
+      });
+
+      // 親ページとは別のGAプロパティIDを使用するか、同じIDを使用するかは検証目的によります。
+      // ここでは異なるID (`GA_MEASUREMENT_ID_IFRAME`) として区別していますが、適宜変更してください。
+      gtag('config', 'G-JD6PMBFG6J');
+    </script>
+
+    <script>
+      // DataLayer PUSH Example for GTM
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        'page_location': 'iframe_content',
+        'event': 'iframe_data_ready' // Optional: custom event to signal data is ready
+      });
+    </script>
+
+    <style>
+        body { font-family: sans-serif; margin: 10px; background-color: #e0e0e0; color: #333; }
+        .content { background-color: #fff; padding: 15px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-YYYYYYY"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <div class="content">
+        <h2>iframe内コンテンツ</h2>
+        <p>このコンテンツはiframe内に表示されています。CookieとGAの動作確認用です。</p>
+        <p>親ページのCookieYes同意設定が、このiframe内のGA計測にどのように影響するかを確認します。</p>
+    </div>
+
+    <script>
+      window.addEventListener('message', function(event) {
+        // 親ページの期待されるオリジン (実際の環境に合わせてください)
+        // 例: GitHub Pagesの場合 'https://ユーザー名.github.io'
+        const expectedOrigin = 'https://ronkovic.github.io'; 
+
+        // オリジンとメッセージタイプを検証
+        if (event.origin !== expectedOrigin) {
+          console.warn('Iframe: Message received from unexpected origin:', event.origin, 'Expected:', expectedOrigin);
+          return;
+        }
+
+        if (event.data && event.data.type === 'consentUpdate') {
+          const consentState = event.data.consent;
+          console.log('Iframe: Received consent update from parent:', consentState);
+
+          // iframe内のGA/GTMの同意状態を更新
+          if (window.gtag) {
+            window.gtag('consent', 'update', consentState);
+            console.log('Iframe: gtag consent updated.');
+          } else {
+            console.warn('Iframe: gtag not found to update consent.');
+          }
+          // もしGTMのみでgtag関数が直接公開されていない場合は、dataLayer経由でイベントを送信し、
+          // GTM側でそのイベントをトリガーに同意更新タグを起動するなどの対応も考えられます。
+          // window.dataLayer = window.dataLayer || [];
+          // window.dataLayer.push({
+          //   'event': 'iframe_consent_received',
+          //   'consentDetails': consentState
+          // });
+        } else {
+          // console.log('Iframe: Received non-consentUpdate message or invalid data:', event.data);
+        }
+      });
+    </script>
+</body>
+</html>
