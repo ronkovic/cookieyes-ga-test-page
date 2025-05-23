@@ -64,40 +64,5 @@
         <p>親ページのCookieYes同意設定が、このiframe内のGA計測にどのように影響するかを確認します。</p>
     </div>
 
-    <script>
-      window.addEventListener('message', function(event) {
-        // 親ページの期待されるオリジン (実際の環境に合わせてください)
-        // 例: GitHub Pagesの場合 'https://ユーザー名.github.io'
-        const expectedOrigin = 'https://ronkovic.github.io'; 
-
-        // オリジンとメッセージタイプを検証
-        if (event.origin !== expectedOrigin) {
-          console.warn('Iframe: Message received from unexpected origin:', event.origin, 'Expected:', expectedOrigin);
-          return;
-        }
-
-        if (event.data && event.data.type === 'consentUpdate') {
-          const consentState = event.data.consent;
-          console.log('Iframe: Received consent update from parent:', consentState);
-
-          // iframe内のGA/GTMの同意状態を更新
-          if (window.gtag) {
-            window.gtag('consent', 'update', consentState);
-            console.log('Iframe: gtag consent updated.');
-          } else {
-            console.warn('Iframe: gtag not found to update consent.');
-          }
-          // もしGTMのみでgtag関数が直接公開されていない場合は、dataLayer経由でイベントを送信し、
-          // GTM側でそのイベントをトリガーに同意更新タグを起動するなどの対応も考えられます。
-          // window.dataLayer = window.dataLayer || [];
-          // window.dataLayer.push({
-          //   'event': 'iframe_consent_received',
-          //   'consentDetails': consentState
-          // });
-        } else {
-          // console.log('Iframe: Received non-consentUpdate message or invalid data:', event.data);
-        }
-      });
-    </script>
 </body>
 </html>
